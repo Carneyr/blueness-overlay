@@ -28,7 +28,7 @@ RDEPEND="
 	dev-lang/php[gd,pdo,postgres?,xml]
 	dev-php/pecl-apc
 	dev-php/pecl-uploadprogress
-	mysql? ( || ( 
+	mysql? ( || (
 				dev-lang/php[mysql]
 				dev-lang/php[mysqli]
 				dev-lang/php[mysqlnd]
