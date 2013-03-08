@@ -1,0 +1,72 @@
+
+Below are the instructions for preparing either the MySQL or PostgreSQL
+database.  Follow the instructions for you setup.
+
+================================================================================
+
+CREATE THE MySQL DATABASE
+--------------------------
+
+This step is only necessary if you don't already have a database set-up (e.g. by
+your host). In the following examples, 'username' is an example MySQL user which
+has the CREATE and GRANT privileges. Use the appropriate user name for your
+system.
+
+First, you must create a new database for your Drupal site (here, 'databasename'
+is the name of the new database):
+
+  mysqladmin -u username -p create databasename
+
+MySQL will prompt for the 'username' database password and then create the
+initial database files. Next you must login and set the access database rights:
+
+  mysql -u username -p
+
+Again, you will be asked for the 'username' database password. At the MySQL
+prompt, enter following command:
+
+  GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER,
+  CREATE TEMPORARY TABLES ON databasename.*
+  TO 'username'@'localhost' IDENTIFIED BY 'password';
+
+where
+
+ 'databasename' is the name of your database
+ 'username@localhost' is the username of your MySQL account
+ 'password' is the password required for that username
+
+Note: Unless your database user has all of the privileges listed above, you will
+not be able to run Drupal.
+
+If successful, MySQL will reply with:
+
+  Query OK, 0 rows affected
+
+================================================================================
+
+CREATE THE PostgreSQL DATABASE
+------------------------------
+
+Note that the database must be created with UTF-8 (Unicode) encoding.
+
+1. CREATE DATABASE USER
+
+   This step is only necessary if you don't already have a user set up (e.g.
+   by your host) or you want to create new user for use with Drupal only. The
+   following command creates a new user named "username" and asks for a
+   password for that user:
+
+     createuser --pwprompt --encrypted --no-adduser --no-createdb username
+
+   If everything works correctly, you'll see a "CREATE USER" notice.
+
+2. CREATE THE DRUPAL DATABASE
+
+   This step is only necessary if you don't already have a database set up (e.g.
+   by your host) or you want to create new database for use with Drupal only.
+   The following command creates a new database named "databasename", which is
+   owned by previously created "username":
+
+     createdb --encoding=UNICODE --owner=username databasename
+
+   If everything works correctly, you'll see a "CREATE DATABASE" notice.
